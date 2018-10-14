@@ -29,7 +29,6 @@ void arg_parser_delete(struct Object * const obj)
 char ** arg_parser_parse(union Arg_Parser * const this, size_t * const argc, FILE * const stream)
 {
     memset(this->line, 0, this->line_max_length);
-    memset(this->argv, 0, this->max_argc);
 
     size_t scan_size = fscanf(stream, Line_Fmt, this->line);
     Dbg_Info("%s: %d bytes read from stream =\"%s\"", __func__, scan_size, (scan_size)?this->line : "empty");
@@ -49,7 +48,7 @@ size_t arg_parser_split(union Arg_Parser * const this, char const delim)
 	size_t argc;
 	memset(this->argv, 0, this->max_argc);
 
-	for(argc = 0, i = NULL, begin = this->line;
+	for(argc = 0, i = this->line, begin = this->line;
 			NULL != i && argc < this->max_argc;
 			++argc, begin = i)
 	{

@@ -13,7 +13,8 @@ struct Console_Class Console_Class =
 {
     {console_delete, NULL},
     console_on_call,
-    console_printf
+    console_printf,
+    console_usage
 };
 
 static union Console Console = {NULL};
